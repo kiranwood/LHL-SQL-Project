@@ -1,4 +1,4 @@
-Question 1: 
+Question 1: What year had the most sales?
 
 SQL Queries:
 
