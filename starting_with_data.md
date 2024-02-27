@@ -1,4 +1,4 @@
-Question 1: What year had the most sales?
+Question 1: What month gets the most average sales?
 
 SQL Queries:
 
