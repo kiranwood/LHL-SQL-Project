@@ -6,7 +6,7 @@ Answer:
 
 
 
-Question 2: 
+Question 2: Which month has the highest revenue? 
 
 SQL Queries:
 
