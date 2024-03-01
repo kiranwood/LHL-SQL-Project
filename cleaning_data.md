@@ -26,7 +26,7 @@ WITH transactions AS -- information on transactions
 	FROM  		all_sessions
 	WHERE   	totaltransactionrevenue IS NOT NULL -- only visits that have transaction
 	GROUP BY	visitid, fullvisitorid, totaltransactionrevenue, city, country,
-			CAST(date::VARCHAR as DATE)
+			CAST(date::VARCHAR as DATE) -- only unique visits
 	)
 ```
 
@@ -36,7 +36,7 @@ WITH transaction_details AS -- productsku per transaction
 	SELECT	visitid,
 		RPAD(productsku, 14, '0') AS productsku
 	FROM   	all_sessions
-	WHERE	totaltransactionrevenue > 0
+	WHERE	totaltransactionrevenue > 0 -- only transactions
 	)
 ```
 
@@ -64,9 +64,9 @@ WITH Products AS  -- product information that have transactions
 				ORDER BY v2productcategory DESC) as dups -- ranking duplicates to remove
 		FROM    	all_sessions
 		WHERE   	totaltransactionrevenue > 0
-		GROUP BY	productsku, v2productname, v2productcategory
+		GROUP BY	productsku, v2productname, v2productcategory -- removing duplicate products
 		)
-	WHERE	dups = 1 -- removing duplicate productsku
+	WHERE	dups = 1
 	)
 ```
 
