@@ -1,4 +1,4 @@
-**What issues will you address by cleaning the data?**
+## What issues will you address by cleaning the data?
 
 - Removing irrelevatant data
 - Removing duplicated data by creating CTE's
@@ -7,7 +7,7 @@
 - Changing any unavailable or null data into N/A
 - Changing values to make coloumns consistent
 
-**Queries:**
+## Queries:
 
 CTE's were used in each query. One or multiple CTE's were used depending on the question.
 
