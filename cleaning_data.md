@@ -37,7 +37,8 @@ WITH transaction_details AS -- Productsku per Transaction
 	SELECT	visitid,
 		RPAD(productsku, 14, '0') AS productsku
 	FROM   	all_sessions
-	WHERE	totaltransactionrevenue > 0)
+	WHERE	totaltransactionrevenue > 0
+	)
 ```
 
 ```
@@ -58,8 +59,8 @@ WITH Products AS
 	FROM
 		(  -- Subquery to Remove Duplicate Categories
 		SELECT		productsku,
-				v2productname as name,
-				v2productcategory as category,
+				v2productname AS name,
+				v2productcategory AS category,
 				DENSE_RANK() OVER (PARTITION BY productsku
 				ORDER BY v2productcategory DESC) as dups -- ranking duplicates to remove
 		FROM    	all_sessions
@@ -72,15 +73,19 @@ WITH Products AS
 
 ```
 WITH visitors AS
-          (SELECT   fullvisitorid,
-                    city,
-                    country
-          FROM  (
-                  SELECT   fullvisitorid, city, country,
-                            DENSE_RANK() OVER (PARTITION BY fullvisitorid ORDER BY date DESC, time DESC) as rank
-                  FROM      all_sessions
-                  GROUP BY  fullvisitorid, city, country, date, time)
-          WHERE    rank = 1)
+	(
+	SELECT	fullvisitorid,
+		city,
+		country
+	FROM
+		(
+		SELECT		fullvisitorid, city, country,
+				DENSE_RANK() OVER (PARTITION BY fullvisitorid ORDER BY date DESC, time DESC) as rank
+		FROM		all_sessions
+		GROUP BY	fullvisitorid, city, country, date, time
+		)
+	WHERE	rank = 1
+	)
 ```
 
 
