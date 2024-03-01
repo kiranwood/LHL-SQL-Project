@@ -120,7 +120,9 @@ SELECT 		country,
 		AVG(productcount) AS avgproduct
 FROM
 	( -- subquery to count products per visitor
-	SELECT		visitorid, city, country,
+	SELECT		visitorid,
+			city,
+			country,
 			COUNT(productsku) AS productcount
 	FROM		transaction_details
 	LEFT JOIN 	transactions
@@ -136,11 +138,13 @@ SELECT		city,
 		AVG(productcount) AS avgproduct
 FROM
 	( -- subquery to count products per visitor
-	SELECT		visitorid, city, country,
+	SELECT		visitorid,
+			city,
+			country,
 			COUNT(productsku) AS productcount
 	FROM 		transaction_details
 	LEFT JOIN 	transactions
-	USING 		(visitid)
+	USING		(visitid)
 	GROUP BY	visitorid, city, country
 	)
 GROUP BY	city
@@ -163,30 +167,32 @@ With the cities almost every city has the average of 1 except the non specified 
 ## **Question 3: Is there any pattern in the types (product categories) of products ordered from visitors in each city and country?**
 
 
-###SQL Queries:
+### SQL Queries:
 
 ```
-SELECT country, category,
+SELECT		country,
+		category,
 		COUNT(category) AS productamount
-FROM transaction_details
-JOIN transactions
-USING(visitid)
-JOIN products
-USING(productsku)
-GROUP BY country, category
-ORDER BY productamount DESC
+FROM		transaction_details
+JOIN		transactions
+USING		(visitid)
+JOIN		products
+USING		(productsku)
+GROUP BY	country, category
+ORDER BY	productamount DESC
 ```
 
 ```
-SELECT city, category,
+SELECT		city,
+		category,
 		COUNT(category) AS productamount
-FROM transaction_details
-JOIN transactions
-USING(visitid)
-JOIN products
-USING(productsku)
-GROUP BY city, category
-ORDER BY productamount DESC
+FROM 		transaction_details
+JOIN 		transactions
+USING		(visitid)
+JOIN 		products
+USING		(productsku)
+GROUP BY 	city, category
+ORDER BY 	productamount DESC
 ```
 
 
@@ -208,43 +214,55 @@ Overall Apparel and Nest products have to be the most sold category of products.
 ### SQL Queries:
 
 ```
-SELECT country, name, productcount
-FROM (
-SELECT country, name,
-		count(name) AS productcount,
-		DENSE_RANK() OVER (PARTITION BY country ORDER BY COUNT(name) DESC)
-FROM transaction_details
-JOIN transactions
-USING(visitid)
-JOIN products
-USING(productsku)
-GROUP BY country, name
-ORDER BY productcount DESC )
-WHERE dense_rank = 1
+SELECT	country,
+	name,
+	productcount
+FROM
+	( -- Subquery to get only top-selling product
+	SELECT		country,
+			name,
+			count(name) AS productcount,
+			DENSE_RANK() OVER (PARTITION BY country ORDER BY COUNT(name) DESC)
+	FROM 		transaction_details
+	JOIN		transactions
+	USING		(visitid)
+	JOIN 		products
+	USING		(productsku)
+	GROUP BY	country, name
+	ORDER BY	productcount DESC
+	)
+WHERE	dense_rank = 1
 ```
 
 ```
-SELECT	city, name, productcount
-FROM (
-SELECT city, name,
-		count(name) AS productcount,
-		DENSE_RANK() OVER (PARTITION BY city ORDER BY COUNT(name) DESC)
-FROM transaction_details
-JOIN transactions
-USING(visitid)
-JOIN products
-USING(productsku)
-GROUP BY city, name
-ORDER BY productcount DESC )
-WHERE dense_rank = 1
+SELECT	city,
+	name,
+	productcount
+FROM
+	(  -- Subquery to get only top-selling product
+	SELECT 		city,
+			name,
+			count(name) AS productcount,
+			DENSE_RANK() OVER (PARTITION BY city ORDER BY COUNT(name) DESC)
+	FROM 		transaction_details
+	JOIN 		transactions
+	USING		(visitid)
+	JOIN 		products
+	USING		(productsku)
+	GROUP BY	city, name
+	ORDER BY	productcount DESC
+	)
+WHERE	dense_rank = 1
 ```
 
 
 ### Answer:
 
-The top selling product in the United States is Nest® Learning Thermostat 3rd Gen-USA - Stainless Steel with 7 separate sales. The rest only have one product with one sale. Austrailia's top product is the Nest® Cam Indoor Security Camera - USA. Canada has a tie with the Google Men's 3/4 Sleeve Raglan Henley Grey and Google Men's  Zip Hoodie. Israel top product is the Nest® Protect Smoke + CO Black Wired Alarm-USA and Switzerland's is the YouTube Men's 3/4 Sleeve Henley.
+The top selling product in the United States is the Nest® Learning Thermostat 3rd Gen-USA - Stainless Steel with 7 separate sales. The rest only have one product with one sale. Austrailia's top product is the Nest® Cam Indoor Security Camera - USA. Canada has a tie with the Google Men's 3/4 Sleeve Raglan Henley Grey and Google Men's  Zip Hoodie. Israel top product is the Nest® Protect Smoke + CO Black Wired Alarm-USA and Switzerland's is the YouTube Men's 3/4 Sleeve Henley.
 
-# Dont Forget to Add
+Most cities only have 1 sale per product. The only products that have mutiple sales are the Nest® Learning Thermostat 3rd Gen-USA - Stainless Steel and the Nest® Protect Smoke + CO White Wired Alarm-USA with 2 sales in cities that are unidentified.
+
+Overall the product that has the most sales between counties and cities is the Nest® Learning Thermostat 3rd Gen-USA - Stainless Steel.
 
 
 
@@ -253,12 +271,13 @@ The top selling product in the United States is Nest® Learning Thermostat 3rd G
 ### SQL Queries:
 
 ```
-SELECT country, city,
+SELECT		country,
+		city,
 		SUM(revenue) AS totalrevenue
-FROM transactions
-GROUP BY country, city
-HAVING SUM(revenue) IS NOT NULL
-ORDER BY totalrevenue DESC, country, city
+FROM 		transactions
+GROUP BY 	country, city
+HAVING		SUM(revenue) IS NOT NULL
+ORDER BY	totalrevenue DESC, country, city
 ```
 
 ### Answer:
