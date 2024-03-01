@@ -41,7 +41,7 @@ WITH transaction_details AS -- productsku per transaction
 ```
 
 ```
-WITH Products AS  
+WITH Products AS  -- product information
 	(
 	SELECT	RPAD(productsku, 14, '0') AS productsku,
 		name,
