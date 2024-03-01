@@ -12,7 +12,7 @@ Queries:
 CTE's were used in each query. One or multiple CTE's were used depending on the question.
 
 ```
-WITH transactions AS
+WITH transactions AS -- information on transactions
 	(
 	SELECT		visitid,
 			LPAD(fullvisitorid::varchar, 19, '0') AS visitorid,
