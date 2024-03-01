@@ -103,6 +103,7 @@ LIMIT 3
 ### Answer:
 
 The top 3 countries that have the highest level of revenue are The United States at $12,999, Israel at $602 and Austrailia at $358.
+
 While top 3 cities excluding invalid data is San Francisco at $1561, Sunnyvale at $991 and Atlanta at $853.
 
 
@@ -186,7 +187,9 @@ ORDER BY productamount DESC
 ### Answer:
 
 Most if not all visitors in the United States, Canada and Switzerland have brought Apparel. Where as the top category of products in Israel and Australia has been Nest. The United States has brought the most amount of Apparel with 31 separate sales. The United States has also brought the most amount of Nest products at 26 separate sales.
+
 In cities excluding the invalid cities, the highest product category has been Apparel. Notably Mountain View and New York both having 5 separate sales buying the producs. The second highest category has been Nest. Notably including San Francisco with 4 separate sales and Palo Alto with 3 separate sales.
+
 Overall Apparel and Nest products seem to be the most sold category of products.
 
 
