@@ -80,7 +80,8 @@ WITH visitors AS
 	FROM
 		(
 		SELECT		fullvisitorid, city, country,
-				DENSE_RANK() OVER (PARTITION BY fullvisitorid ORDER BY date DESC, time DESC) as rank
+				DENSE_RANK() OVER (PARTITION BY fullvisitorid
+				ORDER BY date DESC, time DESC) as rank
 		FROM		all_sessions
 		GROUP BY	fullvisitorid, city, country, date, time
 		)
