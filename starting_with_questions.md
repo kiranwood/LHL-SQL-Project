@@ -1,4 +1,4 @@
-All queries in these questions have this CTE above (more details in cleaning_data.md):
+# All queries in these questions have this CTE above (more details in cleaning_data.md):
 
 
 
@@ -76,10 +76,10 @@ WITH transactions AS -- information on transactions
 
 
     
-**Question 1: Which cities and countries have the highest level of transaction revenues on the site?**
+## **Question 1: Which cities and countries have the highest level of transaction revenues on the site?**
 
 
-SQL Queries: 
+### SQL Queries: 
 
 ```
 SELECT      city,
@@ -100,7 +100,7 @@ ORDER BY SUM(revenue) DESC
 LIMIT 3
 ```
 
-Answer:
+### Answer:
 
 The top 3 countries that have the highest level of revenue are The United States at $12,999, Israel at $602 and Austrailia at $358.
 While top 3 cities excluding invalid data is San Francisco at $1561, Sunnyvale at $991 and Atlanta at $853.
@@ -108,10 +108,10 @@ While top 3 cities excluding invalid data is San Francisco at $1561, Sunnyvale a
 
 
 
-**Question 2: What is the average number of products ordered from visitors in each city and country?**
+## **Question 2: What is the average number of products ordered from visitors in each city and country?**
 
 
-SQL Queries:
+### SQL Queries:
 
 ```
 
@@ -142,7 +142,7 @@ ORDER BY avgproduct DESC
 
 
 
-Answer:
+### Answer:
 
 Due to the original data being extremely messy and large amounts of null values, I was unable to find a way of getting the number of products ordered per transaction without it being inaccurate or making huge assumptions on the data. Instead I was able to find the average number of distinct products being brought for each country and city.
 
@@ -153,10 +153,10 @@ With the cities almost every city has the average of 1 except the non specified 
 
 
 
-**Question 3: Is there any pattern in the types (product categories) of products ordered from visitors in each city and country?**
+## **Question 3: Is there any pattern in the types (product categories) of products ordered from visitors in each city and country?**
 
 
-SQL Queries:
+###SQL Queries:
 
 ```
 SELECT country, category,
@@ -183,7 +183,7 @@ ORDER BY productamount DESC
 ```
 
 
-Answer:
+### Answer:
 
 Most if not all visitors in the United States, Canada and Switzerland have brought Apparel. Where as the top category of products in Israel and Australia has been Nest. The United States has brought the most amount of Apparel with 31 separate sales. The United States has also brought the most amount of Nest products at 26 separate sales.
 In cities excluding the invalid cities, the highest product category has been Apparel. Notably Mountain View and New York both having 5 separate sales buying the producs. The second highest category has been Nest. Notably including San Francisco with 4 separate sales and Palo Alto with 3 separate sales.
@@ -193,10 +193,10 @@ Overall Apparel and Nest products seem to be the most sold category of products.
 
 
 
-**Question 4: What is the top-selling product from each city/country? Can we find any pattern worthy of noting in the products sold?**
+## **Question 4: What is the top-selling product from each city/country? Can we find any pattern worthy of noting in the products sold?**
 
 
-SQL Queries:
+###SQL Queries:
 
 ```
 SELECT country, name, productcount
@@ -231,20 +231,20 @@ WHERE dense_rank = 1
 ```
 
 
-Answer:
+###Answer:
 
 The top selling product in The United States is Nest® Learning Thermostat 3rd Gen-USA - Stainless Steel with 7 separate sales. The rest only have one product with one sale. Austrailia's top product is the Nest® Cam Indoor Security Camera - USA. Canada has a tie with the Google Men's 3/4 Sleeve Raglan Henley Grey and Google Men's  Zip Hoodie. Israel top product is the Nest® Protect Smoke + CO Black Wired Alarm-USA and Switzerland's is the YouTube Men's 3/4 Sleeve Henley.
 
 
 
 
-**Question 5: Can we summarize the impact of revenue generated from each city/country?**
+##**Question 5: Can we summarize the impact of revenue generated from each city/country?**
 
-SQL Queries:
+###SQL Queries:
 
 
 
-Answer:
+###Answer:
 
 
 
