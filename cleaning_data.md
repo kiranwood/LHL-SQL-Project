@@ -1,4 +1,4 @@
-What issues will you address by cleaning the data?
+**What issues will you address by cleaning the data?**
 
 - Removing irrelevatant data
 - Removing duplicated data by creating CTE's
@@ -7,7 +7,7 @@ What issues will you address by cleaning the data?
 - Changing any unavailable or null data into N/A
 - Changing values to make coloumns consistent
 
-Queries:
+**Queries:**
 
 CTE's were used in each query. One or multiple CTE's were used depending on the question.
 
@@ -41,7 +41,7 @@ WITH transaction_details AS -- productsku per transaction
 ```
 
 ```
-WITH Products AS  -- product information that have transactions
+WITH products AS  -- product information that have transactions
 	(
 	SELECT	RPAD(productsku, 14, '0') AS productsku,
 		name,
@@ -54,7 +54,7 @@ WITH Products AS  -- product information that have transactions
 		WHEN category LIKE '%Drinkware%' THEN 'Drinkware'
 		WHEN category LIKE '%Office%' THEN 'Office'
 		ELSE 'Apparel' -- Any others are both similar in productname to other products of category
-		END
+		END AS category
 	FROM
 		(  -- Subquery to Remove Duplicate Categories
 		SELECT		productsku,
