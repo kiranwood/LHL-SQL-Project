@@ -1,4 +1,4 @@
-# All queries in these questions have this CTE above (more details in cleaning_data.md):
+### All queries in these questions have this CTE above (more details in cleaning_data.md):
 
 
 
@@ -196,7 +196,7 @@ Overall Apparel and Nest products seem to be the most sold category of products.
 ## **Question 4: What is the top-selling product from each city/country? Can we find any pattern worthy of noting in the products sold?**
 
 
-###SQL Queries:
+### SQL Queries:
 
 ```
 SELECT country, name, productcount
@@ -231,20 +231,20 @@ WHERE dense_rank = 1
 ```
 
 
-###Answer:
+### Answer:
 
 The top selling product in The United States is Nest® Learning Thermostat 3rd Gen-USA - Stainless Steel with 7 separate sales. The rest only have one product with one sale. Austrailia's top product is the Nest® Cam Indoor Security Camera - USA. Canada has a tie with the Google Men's 3/4 Sleeve Raglan Henley Grey and Google Men's  Zip Hoodie. Israel top product is the Nest® Protect Smoke + CO Black Wired Alarm-USA and Switzerland's is the YouTube Men's 3/4 Sleeve Henley.
 
 
 
 
-##**Question 5: Can we summarize the impact of revenue generated from each city/country?**
+## **Question 5: Can we summarize the impact of revenue generated from each city/country?**
 
-###SQL Queries:
+### SQL Queries:
 
 
 
-###Answer:
+### Answer:
 
 
 
