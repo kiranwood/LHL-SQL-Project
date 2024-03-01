@@ -104,7 +104,7 @@ LIMIT 3
 
 The top 3 countries that have the highest level of revenue are The United States at $12,999, Israel at $602 and Austrailia at $358.
 
-While top 3 cities excluding invalid data is San Francisco at $1561, Sunnyvale at $991 and Atlanta at $853.
+While top 3 cities excluding unidentified cities is San Francisco at $1,561, Sunnyvale at $991 and Atlanta at $853.
 
 
 
@@ -188,7 +188,7 @@ ORDER BY productamount DESC
 
 Most if not all visitors in the United States, Canada and Switzerland have brought Apparel. Where as the top category of products in Israel and Australia has been Nest. The United States has brought the most amount of Apparel with 31 separate sales. The United States has also brought the most amount of Nest products at 26 separate sales.
 
-In cities excluding the invalid cities, the highest product category has been Apparel. Notably Mountain View and New York both having 5 separate sales buying the producs. The second highest category has been Nest. Notably including San Francisco with 4 separate sales and Palo Alto with 3 separate sales.
+In cities excluding the unidentified cities, the highest product category has been Apparel. Notably Mountain View and New York both having 5 separate sales buying the producs. The second highest category has been Nest. Notably including San Francisco with 4 separate sales and Palo Alto with 3 separate sales.
 
 Overall Apparel and Nest products have to be the most sold category of products.
 
@@ -236,8 +236,9 @@ WHERE dense_rank = 1
 
 ### Answer:
 
-The top selling product in The United States is Nest® Learning Thermostat 3rd Gen-USA - Stainless Steel with 7 separate sales. The rest only have one product with one sale. Austrailia's top product is the Nest® Cam Indoor Security Camera - USA. Canada has a tie with the Google Men's 3/4 Sleeve Raglan Henley Grey and Google Men's  Zip Hoodie. Israel top product is the Nest® Protect Smoke + CO Black Wired Alarm-USA and Switzerland's is the YouTube Men's 3/4 Sleeve Henley.
+The top selling product in the United States is Nest® Learning Thermostat 3rd Gen-USA - Stainless Steel with 7 separate sales. The rest only have one product with one sale. Austrailia's top product is the Nest® Cam Indoor Security Camera - USA. Canada has a tie with the Google Men's 3/4 Sleeve Raglan Henley Grey and Google Men's  Zip Hoodie. Israel top product is the Nest® Protect Smoke + CO Black Wired Alarm-USA and Switzerland's is the YouTube Men's 3/4 Sleeve Henley.
 
+# Dont Forget to Add
 
 
 
@@ -245,9 +246,20 @@ The top selling product in The United States is Nest® Learning Thermostat 3rd G
 
 ### SQL Queries:
 
-
+```
+SELECT country, city,
+		SUM(revenue) AS totalrevenue
+FROM transactions
+GROUP BY country, city
+HAVING SUM(revenue) IS NOT NULL
+ORDER BY totalrevenue DESC, country, city
+```
 
 ### Answer:
+
+In summary the most revenue comes from unidenfied cities from the United States at $5,968. San Fransico also in the United States is second with $1,561 generated. Where as the least amount of revenue generated is Zurich in Switzerland with $16 generated. Columbus in the United States is second last with only $21 generated.
+
+Overall the United States make the most revenue with San Fransico being the known best selling city. Where on the opposite scale Switzerland and Columbus make the least.
 
 
 
