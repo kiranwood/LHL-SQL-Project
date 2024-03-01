@@ -13,20 +13,20 @@ CTE's were used in every query. One or multiple CTE's were used depending on the
 
 ```
 WITH transactions AS
-          (SELECT   visitid,
-			              LPAD(fullvisitorid::varchar, 19, '0') as visitorid,
-			              totaltransactionrevenue/1000000 as revenue,
-			 	            CASE 
-			              WHEN city LIKE '%not available%' THEN 'N/A'
-			              ELSE city
-			              END,
-			              country,
-			              CAST(date::varchar as DATE)
-		    	FROM      all_sessions
-		    	WHERE     totaltransactionrevenue IS NOT NULL
-			    GROUP BY  fullvisitorid, visitid, totaltransactionrevenue, city, country,
-                    CAST(date::varchar as DATE)
-			    ORDER BY  visitid)
+		(SELECT		visitid,
+				LPAD(fullvisitorid::varchar, 19, '0') as visitorid,
+				totaltransactionrevenue/1000000 as revenue,
+				CASE 
+				WHEN city LIKE '%not available%' THEN 'N/A'
+				ELSE city
+				END,
+				country,
+				CAST(date::VARCHAR as DATE)
+		FROM  		all_sessions
+		WHERE   	totaltransactionrevenue IS NOT NULL
+		GROUP BY 	fullvisitorid, visitid, totaltransactionrevenue, city, country,
+				CAST(date::varchar as DATE)
+		ORDER BY  	visitid)
 ```
 
 ```
