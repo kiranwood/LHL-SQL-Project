@@ -82,21 +82,21 @@ WITH transactions AS -- information on transactions
 ### SQL Queries: 
 
 ```
-SELECT      city,
-            SUM(revenue) as totalrevenue
-FROM        transactions
-WHERE       city != 'N/A' -- removing invalid cities
-GROUP BY    city
-ORDER BY SUM(revenue) DESC
+SELECT		city,
+            	SUM(revenue) as totalrevenue
+FROM        	transactions
+WHERE		city != 'N/A' -- removing invalid cities
+GROUP BY    	city
+ORDER BY	SUM(revenue) DESC
 LIMIT 3
 ```
 
 ```
-SELECT country,
+SELECT		country,
 		SUM(revenue) as totalrevenue
-FROM transactions
-GROUP BY country
-ORDER BY SUM(revenue) DESC
+FROM 		transactions
+GROUP BY 	country
+ORDER BY	SUM(revenue) DESC
 LIMIT 3
 ```
 
@@ -116,29 +116,35 @@ While top 3 cities excluding unidentified cities is San Francisco at $1,561, Sun
 
 ```
 
-SELECT country,
+SELECT 		country,
 		AVG(productcount) AS avgproduct
-FROM (SELECT visitorid, city, country,
-		COUNT(productsku) AS productcount
-FROM transaction_details
-LEFT JOIN transactions
-USING (visitid)
-GROUP BY visitorid, city, country)
-GROUP BY country
-ORDER BY avgproduct DESC
+FROM
+	( -- subquery to count products per visitor
+	SELECT		visitorid, city, country,
+			COUNT(productsku) AS productcount
+	FROM		transaction_details
+	LEFT JOIN 	transactions
+	USING 		(visitid)
+	GROUP BY	visitorid, city, country
+	)
+GROUP BY	country
+ORDER BY	avgproduct DESC
 ```
 
 ```
-SELECT city,
+SELECT		city,
 		AVG(productcount) AS avgproduct
-FROM (SELECT visitorid, city, country,
-		COUNT(productsku) AS productcount
-FROM transaction_details
-LEFT JOIN transactions
-USING (visitid)
-GROUP BY visitorid, city, country)
-GROUP BY city
-ORDER BY avgproduct DESC
+FROM
+	( -- subquery to count products per visitor
+	SELECT		visitorid, city, country,
+			COUNT(productsku) AS productcount
+	FROM 		transaction_details
+	LEFT JOIN 	transactions
+	USING 		(visitid)
+	GROUP BY	visitorid, city, country
+	)
+GROUP BY	city
+ORDER BY	avgproduct DESC
 ```
 
 
@@ -218,7 +224,7 @@ WHERE dense_rank = 1
 ```
 
 ```
-SELECT city, name, productcount
+SELECT	city, name, productcount
 FROM (
 SELECT city, name,
 		count(name) AS productcount,
