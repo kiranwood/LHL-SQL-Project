@@ -31,7 +31,7 @@ WITH transactions AS -- information on transactions
 ```
 
 ```
-WITH transaction_details AS -- Productsku per Transaction
+WITH transaction_details AS -- productsku per transaction
 	(
 	SELECT	visitid,
 		RPAD(productsku, 14, '0') AS productsku
