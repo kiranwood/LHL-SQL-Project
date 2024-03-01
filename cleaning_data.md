@@ -2,7 +2,7 @@ What issues will you address by cleaning the data?
 
 - Removing irrelevatant data
 - Removing duplicated data by creating CTE's
-- Creating one or two unique key column for CTE
+- Creating one or two unique key columns for CTE
 - Changing datatypes to fit the coloumn constraint
 - Changing any unavailable or null data into N/A
 - Changing values to make coloumns consistent
