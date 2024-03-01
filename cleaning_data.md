@@ -15,8 +15,8 @@ CTE's were used in every query. One or multiple CTE's were used depending on the
 WITH transactions AS
 	(
 	SELECT		visitid,
-			LPAD(fullvisitorid::varchar, 19, '0') as visitorid,
-			totaltransactionrevenue/1000000 as revenue,
+			LPAD(fullvisitorid::varchar, 19, '0') AS visitorid,
+			totaltransactionrevenue/1000000 AS revenue,
 			CASE 
 			WHEN city LIKE '%not available%' THEN 'N/A'
 			ELSE city
@@ -26,44 +26,48 @@ WITH transactions AS
 	FROM  		all_sessions
 	WHERE   	totaltransactionrevenue IS NOT NULL
 	GROUP BY	fullvisitorid, visitid, totaltransactionrevenue, city, country,
-			CAST(date::varchar as DATE)
-	ORDER BY  	visitid
+			CAST(date::VARCHAR as DATE)
+	ORDER BY	visitid
 	)
 ```
 
 ```
 WITH transaction_details AS -- Productsku per Transaction
-          (SELECT    visitid,
-                     RPAD(productsku, 14, '0') as productsku
-            FROM     all_sessions
-						WHERE    totaltransactionrevenue > 0)
+	(
+	SELECT	visitid,
+		RPAD(productsku, 14, '0') AS productsku
+	FROM   	all_sessions
+	WHERE	totaltransactionrevenue > 0)
 ```
 
 ```
 WITH Products AS  
-          (SELECT   RPAD(productsku, 14, '0') as productsku,
-                    name,
-                    CASE
-                  	WHEN category LIKE '%Shop by Brand%' THEN 'Shop by Brand'
-		              	WHEN category LIKE '%Accessories%' THEN 'Accesories'
-              			WHEN category LIKE '%Apparel%' THEN 'Apparel'
-			              WHEN category LIKE '%Nest%' THEN 'Nest'
-			              WHEN category LIKE '%Bags%' THEN 'Bags'
-			              WHEN category LIKE '%Drinkware%' THEN 'Drinkware'
-			              WHEN category LIKE '%Office%' THEN 'Office'
-			              ELSE 'Apparel' -- Any others are both similar in productname to other products of category
-			              END
-            FROM  (  -- Subquery to Remove Duplicate Categories
-                      SELECT    productsku,
-                                v2productname as name,
-                                v2productcategory as category,
-                                DENSE_RANK() OVER (PARTITION BY productsku
-                                ORDER BY v2productcategory DESC) as dups -- ranking duplicates to remove
-                      FROM      all_sessions
-                      WHERE     totaltransactionrevenue > 0
-                      GROUP BY  productsku, v2productname, v2productcategory)
-            WHERE dups = 1 -- removing duplicate productsku
-                    )
+	(
+	SELECT	RPAD(productsku, 14, '0') AS productsku,
+		name,
+		CASE
+		WHEN category LIKE '%Shop by Brand%' THEN 'Shop by Brand'
+		WHEN category LIKE '%Accessories%' THEN 'Accesories'
+		WHEN category LIKE '%Apparel%' THEN 'Apparel'
+		WHEN category LIKE '%Nest%' THEN 'Nest'
+		WHEN category LIKE '%Bags%' THEN 'Bags'
+		WHEN category LIKE '%Drinkware%' THEN 'Drinkware'
+		WHEN category LIKE '%Office%' THEN 'Office'
+		ELSE 'Apparel' -- Any others are both similar in productname to other products of category
+		END
+	FROM
+		(  -- Subquery to Remove Duplicate Categories
+		SELECT		productsku,
+				v2productname as name,
+				v2productcategory as category,
+				DENSE_RANK() OVER (PARTITION BY productsku
+				ORDER BY v2productcategory DESC) as dups -- ranking duplicates to remove
+		FROM    	all_sessions
+		WHERE   	totaltransactionrevenue > 0
+		GROUP BY	productsku, v2productname, v2productcategory
+		)
+	WHERE	dups = 1 -- removing duplicate productsku
+	)
 ```
 
 ```
