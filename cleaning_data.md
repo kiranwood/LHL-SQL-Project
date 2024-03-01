@@ -9,7 +9,7 @@ What issues will you address by cleaning the data?
 
 Queries:
 
-CTE's were used in every query. One or multiple CTE's were used depending on the question.
+CTE's were used in each query. One or multiple CTE's were used depending on the question.
 
 ```
 WITH transactions AS
