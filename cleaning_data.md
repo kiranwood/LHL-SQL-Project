@@ -27,7 +27,8 @@ WITH transactions AS
 	WHERE   	totaltransactionrevenue IS NOT NULL
 	GROUP BY	fullvisitorid, visitid, totaltransactionrevenue, city, country,
 			CAST(date::varchar as DATE)
-	ORDER BY  	visitid)
+	ORDER BY  	visitid
+	)
 ```
 
 ```
