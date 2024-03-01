@@ -77,10 +77,10 @@ WITH visitors AS -- visitor information
 		city,
 		country
 	FROM
-		(
+		( -- subquery to remove duplicate visitors
 		SELECT		fullvisitorid, city, country,
 				DENSE_RANK() OVER (PARTITION BY fullvisitorid
-				ORDER BY date DESC, time DESC) as rank
+				ORDER BY date DESC, time DESC) as rank -- chooses country/city based on most recent visit
 		FROM		all_sessions
 		GROUP BY	fullvisitorid, city, country, date, time
 		)
