@@ -25,7 +25,7 @@ WITH transactions AS
 			CAST(date::VARCHAR as DATE)
 	FROM  		all_sessions
 	WHERE   	totaltransactionrevenue IS NOT NULL
-	GROUP BY	fullvisitorid, visitid, totaltransactionrevenue, city, country,
+	GROUP BY	visitid, fullvisitorid, totaltransactionrevenue, city, country,
 			CAST(date::VARCHAR as DATE)
 	ORDER BY	visitid
 	)
