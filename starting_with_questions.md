@@ -190,7 +190,7 @@ Most if not all visitors in the United States, Canada and Switzerland have broug
 
 In cities excluding the invalid cities, the highest product category has been Apparel. Notably Mountain View and New York both having 5 separate sales buying the producs. The second highest category has been Nest. Notably including San Francisco with 4 separate sales and Palo Alto with 3 separate sales.
 
-Overall Apparel and Nest products seem to be the most sold category of products.
+Overall Apparel and Nest products have to be the most sold category of products.
 
 
 
