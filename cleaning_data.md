@@ -14,18 +14,19 @@ CTE's were used in each query. One or multiple CTE's were used depending on the 
 ```
 WITH transactions AS -- information on transactions
 	(
-	SELECT		visitid,
+	SELECT	   	visitid,
+			LPAD(fullvisitorid::VARCHAR, 19, '0') AS visitorid,
 			totaltransactionrevenue/1000000 AS revenue,
 			CASE 
 			WHEN city LIKE '%not available%' THEN 'N/A'
 			ELSE city
-			END AS city,
+			END,
 			country,
 			CAST(date::VARCHAR as DATE)
 	FROM  		all_sessions
 	WHERE   	totaltransactionrevenue IS NOT NULL -- only visits that have transaction
-	GROUP BY	visitid, totaltransactionrevenue, city, country,
-			CAST(date::VARCHAR as DATE) -- only unique visits
+	GROUP BY	visitid, fullvisitorid, totaltransactionrevenue, city, country,
+                	CAST(date::VARCHAR as DATE) -- only unique visits
 	)
 ```
 
