@@ -113,18 +113,18 @@ Excluding unidentify cities, the top 3 cities with most visitors are from Mounta
 ### SQL Queries:
 
 ```
-SELECT EXTRACT(year FROM date) AS year,
+SELECT EXTRACT(YEAR FROM date) AS year,
 		SUM(revenue) AS sumrevenue
 FROM transactions
-GROUP BY EXTRACT(year FROM date)
+GROUP BY EXTRACT(YEAR FROM date)
 ORDER BY sumrevenue DESC
 ```
 
 ```
-SELECT EXTRACT(month FROM date) as month,
+SELECT EXTRACT(MONTH FROM date) as month,
 		SUM(revenue) AS sumrevenue
 FROM transactions
-GROUP BY EXTRACT(month FROM date)
+GROUP BY EXTRACT(MONTH FROM date)
 ORDER BY sumrevenue DESC
 ```
 
@@ -139,18 +139,18 @@ March has the most revenue with $2,860, following December with $2,551 and Janua
 ### SQL Queries:
 
 ```
-SELECT EXTRACT(year FROM date) as year,
+SELECT EXTRACT(YEAR FROM date) as year,
 		COUNT(revenue) AS salesamount
 FROM transactions
-GROUP BY EXTRACT(year FROM date)
+GROUP BY EXTRACT(YEAR FROM date)
 ORDER BY salesamount DESC
 ```
 
 ```
-SELECT EXTRACT(month FROM date) as month,
+SELECT EXTRACT(MONTH FROM date) as month,
 		COUNT(revenue) AS salesamount
 FROM transactions
-GROUP BY EXTRACT(month FROM date)
+GROUP BY EXTRACT(MONTH FROM date)
 ORDER BY salesamount DESC
 ```
 
@@ -166,21 +166,101 @@ May had the most sales of 12 of any month. While March had 11 sales. Both Januar
 ### SQL Queries:
 
 ```
-SELECT EXTRACT(year FROM date) as year,
+SELECT EXTRACT(YEAR FROM date) as year,
 		AVG(revenue) AS avgrevenue
 FROM transactions
-GROUP BY EXTRACT(year FROM date)
+GROUP BY EXTRACT(YEAR FROM date)
+ORDER BY avgrevenue DESC
+```
+
+```
+SELECT EXTRACT(MONTH FROM date) as month,
+		AVG(revenue) AS avgrevenue
+FROM transactions
+GROUP BY EXTRACT(MONTH FROM date)
 ORDER BY avgrevenue DESC
 ```
 
 ### Answer:
 
-2016 has the higher average with 176.76. While 2017 has an average of 176.45 per sale.
+2016 has the higher average with $176.76. While 2017 has an average of $176.45 per sale.
+
+November has the highest average of $480.67. July comes in second with a $305.25 average per sale. While March comes in third with a $260 average per sale.
 
 
 
-## Question 5: 
+## Question 5: What is the best selling product/category by year/month?
 
 ### SQL Queries:
 
+```
+SELECT year, name, productcount
+FROM(
+SELECT EXTRACT(YEAR FROM date) as year,
+		name,
+		COUNT(name) AS productcount,
+		DENSE_RANK() OVER (PARTITION BY EXTRACT(YEAR FROM date)  ORDER BY COUNT(name) DESC)
+FROM transactions
+JOIN transaction_details
+USING(visitid)
+JOIN products
+USING (productsku)
+GROUP BY EXTRACT(YEAR FROM date), name
+ORDER BY productcount DESC)
+WHERE dense_rank = 1
+```
+
+```
+SELECT year, category, productcount
+FROM(
+SELECT EXTRACT(YEAR FROM date) as year,
+		category,
+		COUNT(category) AS productcount,
+		DENSE_RANK() OVER (PARTITION BY EXTRACT(YEAR FROM date)  ORDER BY COUNT(category) DESC)
+FROM transactions
+JOIN transaction_details
+USING(visitid)
+JOIN products
+USING (productsku)
+GROUP BY EXTRACT(YEAR FROM date), category
+ORDER BY productcount DESC)
+WHERE dense_rank = 1
+```
+
+```
+SELECT month, name, productcount
+FROM(
+SELECT EXTRACT(MONTH FROM date) as month,
+		name,
+		COUNT(name) AS productcount,
+		DENSE_RANK() OVER (PARTITION BY EXTRACT(MONTH FROM date)  ORDER BY COUNT(name) DESC)
+FROM transactions
+JOIN transaction_details
+USING(visitid)
+JOIN products
+USING (productsku)
+GROUP BY EXTRACT(MONTH FROM date), name
+ORDER BY productcount DESC)
+WHERE dense_rank = 1
+```
+
+```
+SELECT month, category, productcount
+FROM(
+SELECT EXTRACT(MONTH FROM date) as month,
+		category,
+		COUNT(category) AS productcount,
+		DENSE_RANK() OVER (PARTITION BY EXTRACT(MONTH FROM date)  ORDER BY COUNT(category) DESC)
+FROM transactions
+JOIN transaction_details
+USING(visitid)
+JOIN products
+USING (productsku)
+GROUP BY EXTRACT(MONTH FROM date), category
+ORDER BY productcount DESC)
+WHERE dense_rank = 1
+```
+
 ### Answer:
+
+
