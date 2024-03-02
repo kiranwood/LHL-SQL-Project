@@ -195,7 +195,7 @@ November has the highest average of $480.67. July comes in second with a $305.25
 
 ```
 SELECT year, name, productcount
-FROM(
+FROM( -- Subquery to get the best selling
 SELECT EXTRACT(YEAR FROM date) as year,
 		name,
 		COUNT(name) AS productcount,
@@ -212,7 +212,7 @@ WHERE dense_rank = 1
 
 ```
 SELECT year, category, productcount
-FROM(
+FROM( -- Subquery to get the best selling
 SELECT EXTRACT(YEAR FROM date) as year,
 		category,
 		COUNT(category) AS productcount,
@@ -229,7 +229,7 @@ WHERE dense_rank = 1
 
 ```
 SELECT month, name, productcount
-FROM(
+FROM( -- Subquery to get the best selling
 SELECT EXTRACT(MONTH FROM date) as month,
 		name,
 		COUNT(name) AS productcount,
@@ -246,7 +246,7 @@ WHERE dense_rank = 1
 
 ```
 SELECT month, category, productcount
-FROM(
+FROM( -- Subquery to get the best selling
 SELECT EXTRACT(MONTH FROM date) as month,
 		category,
 		COUNT(category) AS productcount,
@@ -262,5 +262,9 @@ WHERE dense_rank = 1
 ```
 
 ### Answer:
+
+In 2017 the best selling category is NEST with 24 sales, while in 2016 it is Apparel with 12 sales. The best selling product in both 2016 and 2017 is the Nest® Learning Thermostat 3rd Gen-USA - Stainless Steel. 2017 also shared 2 other best selling products which are the Nest® Cam Outdoor Security Camera - USA and the Nest® Cam Indoor Security Camera - USA.
+
+The best selling product in both December and June is the Nest® Learning Thermostat 3rd Gen-USA - Stainless Steel with 3 and 2 sales. The Nest® Cam Outdoor Security Camera - USA had the most sales in both January and March with 2 sales. January also shared the best selling product with the Nest® Protect Smoke + CO Black Wired Alarm-USA. March as well had 2 other best selling being the Nest® Cam Indoor Security Camera - USA and the Nest® Learning Thermostat 3rd Gen-USA. The rest of the months only had one sale per product.
 
 
