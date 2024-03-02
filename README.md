@@ -30,11 +30,11 @@ Using the CTE's make queries to answer each of the questions. Come up with 5 new
 
 ### Step 5
 
-Clean CTE's further. Check each column for potiental data issues and transform data to fix these issues. Format and organize CTE's to be easier to read and understand. Add comments where neccessary. Put the CTE's used in the cleaning_data.md file.
+Clean CTE's further. Check each column for potiental data issues and transform data to fix these issues. Then format and organize CTE's to be easier to read and understand. Add comments where neccessary. After place the CTE's used into the cleaning_data.md file.
 
 ### Step 6
 
-Using the cleaned CTE's, make sure each query for answering the question works and is also formated and organized for readability. Write down the answers to the questions by using the queries. Add the queries/answers of the original 5 questions into the starting_with_quesitions.md file. Then add the answers/queries of new 5 questions into the starting_with_date.md.
+Using the cleaned CTE's, make sure each query for answering the question works and is also formated and organized for readability. After write down the answers to the questions by using the queries. Add the queries/answers of the original 5 questions into the starting_with_quesitions.md file. Then add the answers/queries of new 5 questions into the starting_with_date.md.
 
 ## Results
 (fill in what you discovered this data could tell you and how you used the data to answer those questions)
