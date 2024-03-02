@@ -113,18 +113,18 @@ Excluding unidentify cities, the top 3 cities with most visitors are from Mounta
 ### SQL Queries:
 
 ```
-SELECT EXTRACT(month FROM date) as month,
-		SUM(revenue) AS sumrevenue
-FROM transactions
-GROUP BY EXTRACT(month FROM date)
-ORDER BY sumrevenue DESC
-```
-
-```
 SELECT EXTRACT(year FROM date) AS year,
 		SUM(revenue) AS sumrevenue
 FROM transactions
 GROUP BY EXTRACT(year FROM date)
+ORDER BY sumrevenue DESC
+```
+
+```
+SELECT EXTRACT(month FROM date) as month,
+		SUM(revenue) AS sumrevenue
+FROM transactions
+GROUP BY EXTRACT(month FROM date)
 ORDER BY sumrevenue DESC
 ```
 
@@ -139,14 +139,6 @@ March has the most revenue with $2,860, following December with $2,551 and Janua
 ### SQL Queries:
 
 ```
-SELECT EXTRACT(month FROM date) as month,
-		COUNT(revenue) AS salesamount
-FROM transactions
-GROUP BY EXTRACT(month FROM date)
-ORDER BY salesamount DESC
-```
-
-```
 SELECT EXTRACT(year FROM date) as year,
 		COUNT(revenue) AS salesamount
 FROM transactions
@@ -154,7 +146,17 @@ GROUP BY EXTRACT(year FROM date)
 ORDER BY salesamount DESC
 ```
 
+```
+SELECT EXTRACT(month FROM date) as month,
+		COUNT(revenue) AS salesamount
+FROM transactions
+GROUP BY EXTRACT(month FROM date)
+ORDER BY salesamount DESC
+```
+
 ### Answer:
+
+
 
 
 
