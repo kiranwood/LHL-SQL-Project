@@ -58,12 +58,12 @@ WITH transactions AS -- information on transactions
 
 	visitors AS -- visitor information 
 	(
-	SELECT	fullvisitorid AS visitorid,
+	SELECT	visitorid,
 		city,
 		country
 	FROM
 		( -- subquery to remove duplicate visitors
-		SELECT		fullvisitorid,
+		SELECT		LPAD(fullvisitorid::VARCHAR, 19, '0') AS visitorid,
 				CASE 
 				WHEN city LIKE '%not available%' OR city LIKE '%not set%' THEN 'N/A'
 				ELSE city
