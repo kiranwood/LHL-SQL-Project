@@ -58,14 +58,22 @@ WITH transactions AS -- information on transactions
 
     visitors AS -- visitor information 
 	(
-	SELECT	fullvisitorid,
-		    city,
-		    country
+	SELECT	fullvisitorid AS visitorid,
+		city,
+		country
 	FROM
 		( -- subquery to remove duplicate visitors
-		SELECT		fullvisitorid, city, country,
-				    DENSE_RANK() OVER (PARTITION BY fullvisitorid
-				    ORDER BY date DESC, time DESC) as rank -- chooses country/city based on most recent visit
+		SELECT		fullvisitorid,
+				CASE 
+				WHEN city LIKE '%not available%' OR city LIKE '%not set%' THEN 'N/A'
+				ELSE city
+				END,
+				CASE
+				WHEN country LIKE '%not set%' OR country LIKE '%not available%' THEN 'N/A'
+				ELSE country
+				END AS country,
+				DENSE_RANK() OVER (PARTITION BY fullvisitorid
+				ORDER BY date DESC, time DESC) as rank -- chooses country/city based on most recent visit
 		FROM		all_sessions
 		GROUP BY	fullvisitorid, city, country, date, time
 		)
