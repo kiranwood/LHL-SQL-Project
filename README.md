@@ -18,7 +18,7 @@ Download CSV files and create a new database. Create tables for each file and im
 
 ### Step 2
 
-
+Check the questions and start writing down which columns are important to answering the question. Get a general idea of how to solve the questions using queries and 
 
 ## Results
 (fill in what you discovered this data could tell you and how you used the data to answer those questions)
