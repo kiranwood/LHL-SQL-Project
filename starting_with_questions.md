@@ -90,20 +90,20 @@ WITH transactions AS -- information on transactions
 ### SQL Queries: 
 
 ```
-SELECT		city,
-            	SUM(revenue) as totalrevenue
-FROM        	transactions
-WHERE		city != 'N/A' -- removing invalid cities
-GROUP BY    	city
+SELECT		country,
+		SUM(revenue) as totalrevenue
+FROM 		transactions
+GROUP BY 	country
 ORDER BY	SUM(revenue) DESC
 LIMIT 3
 ```
 
 ```
-SELECT		country,
-		SUM(revenue) as totalrevenue
-FROM 		transactions
-GROUP BY 	country
+SELECT		city,
+            	SUM(revenue) as totalrevenue
+FROM        	transactions
+WHERE		city != 'N/A' -- removing invalid cities
+GROUP BY    	city
 ORDER BY	SUM(revenue) DESC
 LIMIT 3
 ```
