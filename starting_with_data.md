@@ -27,7 +27,7 @@ WITH transactions AS -- information on transactions
 	WHERE	totaltransactionrevenue > 0 -- only transactions
 	),
 
-    	products AS  -- product information that have transactions
+    	productspertrans AS  -- product information that have transactions
 	(
 	SELECT	RPAD(productsku, 14, '0') AS productsku,
             	name,
@@ -208,7 +208,7 @@ FROM
 	FROM 		transactions
 	JOIN 		transaction_details
 	USING		(visitid)
-	JOIN 		products
+	JOIN 		productspertrans
 	USING 		(productsku)
 	GROUP BY 	EXTRACT(YEAR FROM date), name
 	ORDER BY	productcount DESC
@@ -229,7 +229,7 @@ FROM
 	FROM 		transactions
 	JOIN 		transaction_details
 	USING		(visitid)
-	JOIN 		products
+	JOIN 		productspertrans
 	USING 		(productsku)
 	GROUP BY 	EXTRACT(YEAR FROM date), category
 	ORDER BY	productcount DESC
@@ -250,7 +250,7 @@ FROM
 	FROM 		transactions
 	JOIN		transaction_details
 	USING		(visitid)
-	JOIN 		products
+	JOIN 		productspertrans
 	USING 		(productsku)
 	GROUP BY 	EXTRACT(MONTH FROM date), name
 	ORDER BY 	productcount DESC
@@ -271,7 +271,7 @@ FROM
 	FROM 		transactions
 	JOIN 		transaction_details
 	USING		(visitid)
-	JOIN 		products
+	JOIN 		productspertrans
 	USING 		(productsku)
 	GROUP BY	EXTRACT(MONTH FROM date), category
 	ORDER BY 	productcount DESC
