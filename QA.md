@@ -12,7 +12,7 @@
 
 First start with turning all the CTE's into views.
 
-#Step 1 Check for duplicate data.
+### Step 1 Check for duplicate data.
 
 ```
 SELECT visitorid, COUNT(visitorid)
