@@ -11,8 +11,14 @@ The goals of this project is to:
 - Create a QA process
 
 ## Process
-### (your step 1)
-### (your step 2)
+
+###Step 1
+
+Download CSV files and create a new database. Create tables for each file and import file. Make sure all of the columns are filled in correctly and the table is working.
+
+###Step 2
+
+
 
 ## Results
 (fill in what you discovered this data could tell you and how you used the data to answer those questions)
