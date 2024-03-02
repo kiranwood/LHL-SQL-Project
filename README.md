@@ -26,7 +26,7 @@ Start making CTE's that can later be turned into View's or Temporary Tables that
 
 ### Step 4
 
-Using the CTE's make queries to answer each of the questions. Come up with 5 new questions to be able to answer using the data. Then Then write queries to be able to find the answer for those.
+Using the CTE's make queries to answer each of the questions. Come up with 5 new questions to be able to answer using the data. Then write queries to be able to find the answer for those.
 
 ### Step 5
 
