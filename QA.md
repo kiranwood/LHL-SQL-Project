@@ -12,5 +12,33 @@
 
 First start with turning all the CTE's into views.
 
-Then check for duplicate data
+#Step 1 Check for duplicate data.
+
+```
+SELECT visitorid, COUNT(visitorid)
+FROM transactions
+GROUP BY visitorid
+HAVING COUNT(visitorid) > 1
+```
+
+```
+SELECT visitid, productsku, COUNT(visitid)
+FROM transaction_details
+GROUP BY visitid, productsku
+HAVING COUNT(visitid) > 1
+```
+
+```
+SELECT productsku, COUNT(productsku)
+FROM productspertrans
+GROUP BY productsku
+HAVING COUNT(productsku) > 1
+```
+
+```
+SELECT visitorid, COUNT(visitorid)
+FROM visitors
+GROUP BY visitorid
+HAVING COUNT(visitorid) > 1
+```
 
