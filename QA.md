@@ -83,3 +83,41 @@ or country IS NULL
 None of the views have any Null values.
 
 ### Step 3: Check for valid data values
+
+```
+SELECT date
+FROM transactions
+WHERE date > current_date
+```
+
+The date of transaction is not after the current date.
+
+```
+SELECT revenue
+FROM transactions
+WHERE revenue < 1
+```
+
+All revenue is a valid price.
+
+```
+SELECT country, city
+FROM transactions
+GROUP BY country, city
+```
+
+Checking that countries and cities match.
+The second row does not make sense as New York is not a city in Canada.
+
+Made a query to fix the issue:
+
+```
+SELECT CASE
+		WHEN country = 'Canada' AND city = 'New York' THEN 'United States'
+		ELSE country
+		END,
+		city
+FROM transactions
+GROUP BY country, city
+```
+
