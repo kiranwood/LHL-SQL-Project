@@ -20,7 +20,7 @@ WITH transactions AS -- information on transactions
 			CASE 
 			WHEN city LIKE '%not available%' THEN 'N/A'
 			ELSE city
-			END,
+			END AS city,
 			country,
 			CAST(date::VARCHAR as DATE)
 	FROM  		all_sessions
@@ -73,12 +73,20 @@ WITH products AS  -- product information that have transactions
 ```
 WITH visitors AS -- visitor information 
 	(
-	SELECT	fullvisitorid,
+	SELECT	fullvisitorid AS visitorid,
 		city,
 		country
 	FROM
 		( -- subquery to remove duplicate visitors
-		SELECT		fullvisitorid, city, country,
+		SELECT		fullvisitorid,
+				CASE 
+				WHEN city LIKE '%not available%' OR city LIKE '%not set%' THEN 'N/A'
+				ELSE city
+				END,
+				CASE
+				WHEN country LIKE '%not set%' OR country LIKE '%not available%' THEN 'N/A'
+				ELSE country
+				END AS country,
 				DENSE_RANK() OVER (PARTITION BY fullvisitorid
 				ORDER BY date DESC, time DESC) as rank -- chooses country/city based on most recent visit
 		FROM		all_sessions
