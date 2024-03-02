@@ -95,7 +95,7 @@ SELECT		country,
 FROM 		transactions
 GROUP BY 	country
 ORDER BY	SUM(revenue) DESC
-LIMIT 3
+LIMIT		3
 ```
 
 ```
@@ -105,7 +105,7 @@ FROM        	transactions
 WHERE		city != 'N/A' -- removing invalid cities
 GROUP BY    	city
 ORDER BY	SUM(revenue) DESC
-LIMIT 3
+LIMIT		3
 ```
 
 ### Answer:
