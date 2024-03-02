@@ -108,16 +108,31 @@ Excluding unidentify cities, the top 3 cities with most visitors are from Mounta
 
 
 
-## Question 2: What month's and year's have made the most revenue?
+## Question 2: What years and months have made the most revenue?
 
 ### SQL Queries:
 
 ```
+SELECT EXTRACT(month FROM date) as month,
+		SUM(revenue) AS sumrevenue
+FROM transactions
+GROUP BY EXTRACT(month FROM date)
+ORDER BY sumrevenue DESC
+```
 
+```
+SELECT EXTRACT(year FROM date) AS year,
+		SUM(revenue) AS sumrevenue
+FROM transactions
+GROUP BY EXTRACT(year FROM date)
+ORDER BY sumrevenue DESC
+```
 
 ### Answer:
 
+The year 2017 made the most revenue with $9,705, where as 2016 only made $4,419.
 
+March has the most revenue with $2,860, following December with $2,551 and January with $2,241.
 
 ## Question 3: 
 
