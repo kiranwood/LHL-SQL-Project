@@ -28,7 +28,7 @@ WITH transactions AS -- information on transactions
 	WHERE	totaltransactionrevenue > 0 -- only transactions
 	),
 
-    	products AS  -- product information that have transactions
+    	productspertrans AS  -- product information that have transactions
 	(
 	SELECT	RPAD(productsku, 14, '0') AS productsku,
             	name,
@@ -184,7 +184,7 @@ SELECT		country,
 FROM		transaction_details
 JOIN		transactions
 USING		(visitid)
-JOIN		products
+JOIN		productspertrans
 USING		(productsku)
 GROUP BY	country, category
 ORDER BY	productamount DESC
@@ -197,7 +197,7 @@ SELECT		city,
 FROM 		transaction_details
 JOIN 		transactions
 USING		(visitid)
-JOIN 		products
+JOIN 		productspertrans
 USING		(productsku)
 GROUP BY 	city, category
 ORDER BY 	productamount DESC
@@ -234,7 +234,7 @@ FROM
 	FROM 		transaction_details
 	JOIN		transactions
 	USING		(visitid)
-	JOIN 		products
+	JOIN 		productspertrans
 	USING		(productsku)
 	GROUP BY	country, name
 	ORDER BY	productcount DESC
@@ -255,7 +255,7 @@ FROM
 	FROM 		transaction_details
 	JOIN 		transactions
 	USING		(visitid)
-	JOIN 		products
+	JOIN 		productspertrans
 	USING		(productsku)
 	GROUP BY	city, name
 	ORDER BY	productcount DESC
