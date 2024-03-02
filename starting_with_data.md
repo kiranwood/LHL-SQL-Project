@@ -1,37 +1,37 @@
-Question 1: What month gets the most average sales?
+## Question 1: What month gets the most average sales?
 
-SQL Queries:
+### SQL Queries:
 
-Answer: 
-
-
-
-Question 2: Which month has the highest revenue? 
-
-SQL Queries:
-
-Answer:
+### Answer: 
 
 
 
-Question 3: 
+## Question 2: Which month has the highest revenue? 
 
-SQL Queries:
+### SQL Queries:
 
-Answer:
-
-
-
-Question 4: 
-
-SQL Queries:
-
-Answer:
+### Answer:
 
 
 
-Question 5: 
+## Question 3: 
 
-SQL Queries:
+### SQL Queries:
 
-Answer:
+### Answer:
+
+
+
+## Question 4: 
+
+### SQL Queries:
+
+### Answer:
+
+
+
+## Question 5: 
+
+### SQL Queries:
+
+### Answer:
