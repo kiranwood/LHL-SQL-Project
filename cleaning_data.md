@@ -15,7 +15,6 @@ CTE's were used in each query. One or multiple CTE's were used depending on the 
 WITH transactions AS -- information on transactions
 	(
 	SELECT		visitid,
-			LPAD(fullvisitorid::VARCHAR, 19, '0') AS visitorid,
 			totaltransactionrevenue/1000000 AS revenue,
 			CASE 
 			WHEN city LIKE '%not available%' THEN 'N/A'
@@ -73,12 +72,12 @@ WITH productspertrans AS  -- product information that have transactions
 ```
 WITH visitors AS -- visitor information 
 	(
-	SELECT	fullvisitorid AS visitorid,
+	SELECT	visitorid,
 		city,
 		country
 	FROM
 		( -- subquery to remove duplicate visitors
-		SELECT		fullvisitorid,
+		SELECT		LPAD(fullvisitorid::VARCHAR, 19, '0') AS visitorid,
 				CASE 
 				WHEN city LIKE '%not available%' OR city LIKE '%not set%' THEN 'N/A'
 				ELSE city
