@@ -4,7 +4,7 @@
 
 This project is focusing on extracting, transforming, cleaning, loading and analyzing data. As well as developing and running a QA process.
 
-The goals of the project is to:
+The goals of this project is to:
 - Load data into a database
 - Clean data
 - Answer questions based on the data
