@@ -6,7 +6,7 @@
 WITH transactions AS -- information on transactions
 	(
 	SELECT	   	visitid,
-			LPAD(fullvisitorid::varchar, 19, '0') AS visitorid,
+			LPAD(fullvisitorid::VARCHAR, 19, '0') AS visitorid,
 			totaltransactionrevenue/1000000 AS revenue,
 			CASE 
 			WHEN city LIKE '%not available%' THEN 'N/A'
