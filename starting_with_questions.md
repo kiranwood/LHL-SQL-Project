@@ -5,50 +5,50 @@
 ```
 WITH transactions AS -- information on transactions
 	(
-	SELECT	    visitid,
-			    LPAD(fullvisitorid::varchar, 19, '0') AS visitorid,
-			    totaltransactionrevenue/1000000 AS revenue,
-			    CASE 
-			    WHEN city LIKE '%not available%' THEN 'N/A'
-			    ELSE city
-			    END,
-			    country,
-			    CAST(date::VARCHAR as DATE)
+	SELECT	   	visitid,
+			LPAD(fullvisitorid::varchar, 19, '0') AS visitorid,
+			totaltransactionrevenue/1000000 AS revenue,
+			CASE 
+			WHEN city LIKE '%not available%' THEN 'N/A'
+			ELSE city
+			END,
+			country,
+			CAST(date::VARCHAR as DATE)
 	FROM  		all_sessions
 	WHERE   	totaltransactionrevenue IS NOT NULL -- only visits that have transaction
 	GROUP BY	visitid, fullvisitorid, totaltransactionrevenue, city, country,
-                CAST(date::VARCHAR as DATE) -- only unique visits
+                	CAST(date::VARCHAR as DATE) -- only unique visits
 	),
 
-    transaction_details AS -- productsku per transaction
+    	transaction_details AS -- productsku per transaction
 	(
 	SELECT	visitid,
-		    RPAD(productsku, 14, '0') AS productsku
+		RPAD(productsku, 14, '0') AS productsku
 	FROM   	all_sessions
 	WHERE	totaltransactionrevenue > 0 -- only transactions
 	),
 
-    products AS  -- product information that have transactions
+    	products AS  -- product information that have transactions
 	(
 	SELECT	RPAD(productsku, 14, '0') AS productsku,
-            name,
-		    CASE
-		    WHEN category LIKE '%Shop by Brand%' THEN 'Shop by Brand'
-		    WHEN category LIKE '%Accessories%' THEN 'Accesories'
-		    WHEN category LIKE '%Apparel%' THEN 'Apparel'
-		    WHEN category LIKE '%Nest%' THEN 'Nest'
-		    WHEN category LIKE '%Bags%' THEN 'Bags'
-		    WHEN category LIKE '%Drinkware%' THEN 'Drinkware'
+            	name,
+		CASE
+		WHEN category LIKE '%Shop by Brand%' THEN 'Shop by Brand'
+		WHEN category LIKE '%Accessories%' THEN 'Accesories'
+		WHEN category LIKE '%Apparel%' THEN 'Apparel'
+		WHEN category LIKE '%Nest%' THEN 'Nest'
+		WHEN category LIKE '%Bags%' THEN 'Bags'
+		WHEN category LIKE '%Drinkware%' THEN 'Drinkware'
 	    	WHEN category LIKE '%Office%' THEN 'Office'
 	    	ELSE 'Apparel' -- Any others are both similar in productname to other products of category
 	    	END AS category
 	FROM
         (  -- Subquery to Remove Duplicate Categories
 		SELECT		productsku,
-				    v2productname AS name,
+				v2productname AS name,
 			    	v2productcategory AS category,
-				    DENSE_RANK() OVER (PARTITION BY productsku
-				    ORDER BY v2productcategory DESC) as dups -- ranking duplicates to remove
+				DENSE_RANK() OVER (PARTITION BY productsku
+				ORDER BY v2productcategory DESC) as dups -- ranking duplicates to remove
 		FROM    	all_sessions
 		WHERE   	totaltransactionrevenue > 0
 		GROUP BY	productsku, v2productname, v2productcategory -- removing duplicate products
@@ -56,7 +56,7 @@ WITH transactions AS -- information on transactions
 	WHERE	dups = 1
 	),
 
-    visitors AS -- visitor information 
+	visitors AS -- visitor information 
 	(
 	SELECT	fullvisitorid AS visitorid,
 		city,
