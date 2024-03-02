@@ -12,11 +12,11 @@ The goals of this project is to:
 
 ## Process
 
-###Step 1
+### Step 1
 
 Download CSV files and create a new database. Create tables for each file and import file. Make sure all of the columns are filled in correctly and the table is working.
 
-###Step 2
+### Step 2
 
 
 
