@@ -5,7 +5,7 @@
 WITH transactions AS -- information on transactions
 	(
 	SELECT	   	visitid,
-			LPAD(fullvisitorid::varchar, 19, '0') AS visitorid,
+			LPAD(fullvisitorid::VARCHAR, 19, '0') AS visitorid,
 			totaltransactionrevenue/1000000 AS revenue,
 			CASE 
 			WHEN city LIKE '%not available%' THEN 'N/A'
@@ -130,11 +130,11 @@ ORDER BY sumrevenue DESC
 
 ### Answer:
 
-The year 2017 made the most revenue with $9,705, where as 2016 only made $4,419.
+2017 made the most revenue with $9,705, where as 2016 only made $4,419.
 
 March has the most revenue with $2,860, following December with $2,551 and January with $2,241.
 
-## Question 3: 
+## Question 3: What months and years has the most sales?
 
 ### SQL Queries:
 
@@ -156,15 +156,26 @@ ORDER BY salesamount DESC
 
 ### Answer:
 
+2017 had the most sales with 55, having more than double than 2016 with 25 sales.
+
+May had the most sales of 12 of any month. While March had 11 sales. Both January and December had 10 sales.
 
 
-
-
-## Question 4: 
+## Question 4: What months and years have the higher average of revenue per sale? 
 
 ### SQL Queries:
 
+```
+SELECT EXTRACT(year FROM date) as year,
+		AVG(revenue) AS avgrevenue
+FROM transactions
+GROUP BY EXTRACT(year FROM date)
+ORDER BY avgrevenue DESC
+```
+
 ### Answer:
+
+2016 has the higher average with 176.76. While 2017 has an average of 176.45 per sale.
 
 
 
