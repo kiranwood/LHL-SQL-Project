@@ -9,15 +9,3 @@
 ## QA Process:
 
 First started with turning all the CTE's into views.
-
-Task 1: Data Profiling
-
-
-Task 2: Data Validation
-
-
-Task 3: Data Cleansing
-
-
-Task 4 Testing
-
