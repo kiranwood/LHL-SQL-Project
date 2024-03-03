@@ -60,6 +60,6 @@ One of the biggest challenges was being able to understand the data. Without any
 
 ## Future Goals
 
-With more time being spent on the project, I could focus deeper on cleaning and understanding the data on a deeper level. I could compare data on transactions with all sessions data to potentially see what countries, products, etc to focus on to increase potential sales. I could also compare to see what products are gaining the least attraction.
+With more time being spent on the project, there could focus deeper on cleaning and understanding the data on a deeper level. It would be possible to compare data on transactions with all sessions data to potentially see what countries, products, etc to focus on to increase potential sales. As well as compare to see what products are gaining the least attraction.
 
 
