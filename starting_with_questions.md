@@ -163,7 +163,7 @@ ORDER BY	avgproduct DESC
 
 ### Answer:
 
-Due to the original data being extremely messy and large amounts of null values, I was unable to find a way of getting the number of products ordered per transaction without it being inaccurate or making huge assumptions on the data. Instead I was able to find the average number of distinct products being brought for each country and city.
+Due to the original data being extremely messy and large amounts of null values, there was no way of getting the number of products ordered per transaction without it being inaccurate or making huge assumptions on the data. Instead by using the data that is available it is possible to find the average number of distinct products being brought for each country and city.
 
 Using this almost all countries have the average of 1, except the United States which has the average of 1.03.
 With the cities almost every city has the average of 1 except the non specified cities that has a 1.0416 average.
