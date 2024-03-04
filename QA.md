@@ -112,10 +112,19 @@ FROM 		transactions
 GROUP BY 	country, city
 ```
 
-Checking that countries and cities match.
-The second row does not make sense as New York is not a city in Canada.
+```
+SELECT		country,
+		city
+FROM		visitors
+GROUP BY 	country, city
+```
 
-Made a query to fix the issue:
+
+Checking that countries and cities match and that there is only one city per country.
+There are multiple cities that are not in the same country.
+To fix this change the country to match the city.
+
+Query to fix the issue:
 
 ```
 SELECT 		CASE
@@ -124,6 +133,29 @@ SELECT 		CASE
 		END,
 		city
 FROM 		transactions
-GROUP BY	country, city
 ```
+
+```
+SELECT	CASE
+	WHEN city = 'Amsterdam' THEN 'Netherlands'
+	WHEN city = 'Hong Kong' THEN 'China'
+	WHEN city = 'Istanbul' THEN 'Turkey'
+	WHEN city = 'Los Angeles' THEN 'United States'
+	WHEN city = 'Mountain View' THEN 'United States'
+	WHEN city = 'New York' THEN 'United States'
+	WHEN city = 'San Francisco' THEN 'United States'
+	WHEN city = 'Signapore' THEN 'Signapore'
+	WHEN city = 'Bangkok' THEN 'Thailand'
+	WHEN city = 'Toronto' THEN 'Canada'
+	WHEN city = 'Vancouver' THEN 'Canada'
+	When city = 'London' THEN 'United Kingdom'
+	WHEN city = 'Mexico City' THEN 'Mexico'
+	WHEN city = 'Paris' THEN 'France'
+	WHEN city = 'Yokohama' THEN 'Japan'
+	ELSE country 
+	END,
+	city
+FROM	visitors
+```
+
 
